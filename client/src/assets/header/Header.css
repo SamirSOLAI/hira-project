@@ -1,0 +1,72 @@
+.site-header {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-nav {
+  box-sizing: border-box;
+  max-width: 1100px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: #0f766e;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1;
+}
+
+.header-logo-dot {
+  color: #14b8a6;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-link {
+  padding: 10px 0;
+  border-bottom: 2px solid transparent;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.header-link:hover,
+.header-link[aria-current="page"] {
+  color: #0f766e;
+  border-bottom-color: #0f766e;
+}
+
+.header-nav a:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+  .header-nav {
+    padding: 0 16px;
+  }
+
+  .header-links {
+    gap: 20px;
+  }
+}
