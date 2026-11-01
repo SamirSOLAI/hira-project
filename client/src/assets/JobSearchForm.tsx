@@ -1,13 +1,45 @@
 ﻿import { useState } from "react";
+import type { Job } from "./listings";
 
 const JobSearchForm = () => {
-  const [description, setDescription] = useState<string>("");
+  const [prompt, setPrompt] = useState<string>("");
+  const [jobs, setJobs] = useState<Job[]>([]);
 
+  async function handleSearch() {
+    if (prompt.length < 4) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/search", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Search failed");
+      }
+      const data = await response.json();
+      setJobs(data);
+      console.log(jobs);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <main className="search-page">
       <p className="search-eyebrow">A smarter way to find your next role</p>
       <h1>Describe the job you are looking for</h1>
-      <form className="search-bar" onSubmit={(event) => event.preventDefault()}>
+      <form
+        className="search-bar"
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSearch();
+        }}
+      >
         <label htmlFor="job-description">
           What does your next chapter look like?
         </label>
@@ -15,9 +47,9 @@ const JobSearchForm = () => {
           id="job-description"
           name="description"
           rows={2}
-          value={description}
+          value={prompt}
           onChange={(event) => {
-            setDescription(event.currentTarget.value);
+            setPrompt(event.currentTarget.value);
           }}
           placeholder="A developer internship in Paris, using Java or JavaScript..."
         />
