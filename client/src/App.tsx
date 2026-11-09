@@ -9,6 +9,16 @@ function App() {
       <Header />
       <JobSearchForm />
       <Listings />
+      <button
+        onClick={async () => {
+          const response = await fetch("/api/v1/test");
+          const data = await response.json();
+          console.log(data);
+        }}
+      >
+        {" "}
+        test the backend{" "}
+      </button>
     </>
   );
 }
