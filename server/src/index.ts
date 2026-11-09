@@ -1,4 +1,6 @@
+import "dotenv/config";
 import express from "express";
+import { searchController } from "../Controllers/searchController.js";
 
 //init the app
 const app = express();
@@ -14,6 +16,8 @@ router.get("/api/v1/test", (req, res) => {
   });
   console.log("hello bitches");
 });
+
+router.post("/api/search", searchController);
 //lisening
 app.listen(3001, () => {
   console.log("hello from the server yes");
