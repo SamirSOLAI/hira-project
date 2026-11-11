@@ -5,7 +5,7 @@ const JobSearchForm = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [jobs, setJobs] = useState<Job[]>([]);
 
-  async function handleSearch() {
+  async function handlePrompt() {
     if (prompt.length < 4) {
       return;
     }
@@ -24,7 +24,7 @@ const JobSearchForm = () => {
       }
       const data = await response.json();
       setJobs(data);
-      console.log(jobs);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +37,7 @@ const JobSearchForm = () => {
         className="search-bar"
         onSubmit={(event) => {
           event.preventDefault();
-          handleSearch();
+          handlePrompt();
         }}
       >
         <label htmlFor="job-description">
