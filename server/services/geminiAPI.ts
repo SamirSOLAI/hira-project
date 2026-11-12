@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-export type JobSearch = {
+export type JobSearchSpecs = {
   jobTitles: string[];
   location: string;
   skills?: string[];
@@ -33,7 +33,7 @@ const jobSearchSchema = {
 
 export async function structurePrompt(
   prompt: string,
-): Promise<JobSearch | undefined> {
+): Promise<JobSearchSpecs | undefined> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is missing from server/.env");
@@ -52,7 +52,7 @@ export async function structurePrompt(
 
     console.log(response.text);
     if (typeof response.text === "string") {
-      return JSON.parse(response.text);
+      return JSON.parse(response.text) as JobSearchSpecs;
     }
 
     throw new Error("Gemini returned no text");

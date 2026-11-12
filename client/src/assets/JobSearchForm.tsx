@@ -24,7 +24,7 @@ const JobSearchForm = () => {
       }
       const data = await response.json();
       setJobs(data);
-      console.log(data);
+      console.log(data, jobs);
     } catch (err) {
       console.log(err);
     }
