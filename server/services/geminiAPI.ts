@@ -3,6 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 export type JobSearchSpecs = {
   jobTitles: string[];
   location: string;
+  country?: string;
   skills?: string[];
   salary?: number;
   contractType?: string;
@@ -21,11 +22,19 @@ const jobSearchSchema = {
     location: {
       type: "string",
     },
+    country: {
+      type: "string",
+      description:
+        "use the format ISO 3166-1 alpha-2 country codes such as fr, us, ca",
+    },
     salary: {
       type: "number",
     },
     contractType: {
       type: "string",
+      enum: ["FULLTIME", "PARTTIME", "CONTRACTOR", "INTERN"],
+      description:
+        "Employment type using one of the JSearch employment type values",
     },
   },
   required: ["jobTitles", "location"],

@@ -1,14 +1,16 @@
-import { error } from "node:console";
 import type { JobSearchSpecs } from "./geminiAPI.js";
 
-const url = null;
-export const jobRetrieval = async function (JobSearchSpecs: JobSearchSpecs) {
-  const { jobTitles, location, skills, salary, contractType } = JobSearchSpecs;
+export const jobRetrieval = async function (jobSearchSpecs: JobSearchSpecs) {
+  const { jobTitles, location, country, skills, salary, contractType } =
+    jobSearchSpecs;
   const url = new URL("https://jsearch.p.rapidapi.com/search-v2");
 
   const query = `${jobTitles[0]} in ${location}`;
 
   url.searchParams.set("query", query);
+
+  if (country) url.searchParams.set("country", country);
+  if (contractType) url.searchParams.set("employment_types", contractType);
 
   const response = await fetch(url, {
     method: "GET",
